@@ -1,0 +1,27 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+<p style="color: green"><%= notice %></p>
+
+<%= render @location %>
+
+<div>
+  <%= link_to "Edit this location", edit_location_path(@location) %> |
+  <%= link_to "Back to locations", locations_path %>
+
+  <%= button_to "Destroy this location", @location, method: :delete %>
+</div>
+
+<div>
+<%= image_tag "https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/pin-s+ff0000(-121.5542,36.4293)/-121.5542,36.4293,9,0/300x200?access_token=YOUR_MAPBOX_ACCESS_TOKEN" %>
+</div>
+
+<%= image_tag "https://maps.googleapis.com/maps/api/staticmap?center=37.7749,-122.4194&size=300x300&zoom=17" %>
+
+<div id="map" style="width: 600px; height: 400px;"></div>
+
+<div>
+<h3> Places near 100 km </h3>
+<%= @location.nearbys(100).each do |location| %>
+  <p> <%= location.name %> = <%= location.distance_to(@location) %> </p>
+<%end%>
+</div>
+
